@@ -1,0 +1,54 @@
+syntax = "proto3";
+package blog;
+
+option java_package = "com.proto.blog";
+option java_multiple_files = true;
+
+message Blog{
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+}
+message CreateBlogRequest{
+  Blog blog = 1;
+}
+
+message CreateBlogResponse{
+  Blog blog = 1;
+}
+
+message ReadBlogRequest{
+  string blog_id = 1;
+}
+message ReadBlogResponse{
+  Blog blog = 1;
+}
+
+message UpdateBlogRequest{
+  Blog blog = 1;
+}
+message UpdateBlogResponse{
+  Blog blog = 1;
+}
+
+message DeleteBlogRequest{
+  string id = 1;
+}
+message DeleteBlogResponse{
+  string id = 1;
+  int32 count = 2;
+}
+message ListBlogRequest{
+
+}
+message ListBlogResponse{
+  Blog blog = 1;
+}
+service BlogService{
+  rpc createBlog(CreateBlogRequest) returns (CreateBlogResponse){};
+  rpc readBlog(ReadBlogRequest) returns (ReadBlogResponse) {};
+  rpc updateBlog(UpdateBlogRequest) returns (UpdateBlogResponse) {};
+  rpc deleteBlog(DeleteBlogRequest) returns (DeleteBlogResponse) {};
+  rpc listBlog(ListBlogRequest) returns (stream ListBlogResponse) {};
+}
